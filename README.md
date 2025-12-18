@@ -1,130 +1,113 @@
-# E-Commerce Application 
+The goal of this enhancement project is to understand the existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant</a> code, and add the given functionalities within the existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant</a> code.
 
-In this project, let's build a **Nxt Trendz - Cart Features** by applying the concepts we have learned till now.
+Your existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant</a> app, which you have developed, allows users to view a list of dish items in different tabs of menu items. Users can also increase or decrease the quantity of a particular dish item.
 
-
-
-### Refer to the video below:
-
-<br/>
-<div style="text-align: center;">
-  <video style="max-width:70%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12);outline:none;" loop="true" autoplay="autoplay" controls="controls" muted>
-    <source src="https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-output.mp4" type="video/mp4">
-  </video>
-</div>
-<br/>
-
-### Design Files
-
-<details>
-<summary>Click to view</summary>
-
-- [Extra Small (Size < 576px) and Small (Size >= 576px)](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-sm-output-v0.png)
-- [Medium (Size >= 768px), Large (Size >= 992px) and Extra Large (Size >= 1200px)](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-lg-output.png)
-
-</details>
-
-### Set Up Instructions
-
-<details>
-<summary>Click to view</summary>
-
-- Download dependencies by running `npm install`
-- Start up the app using `npm start`
-</details>
-
-### Completion Instructions
+### Enhancement Functionality
 
 <details>
 <summary>Functionality to be added</summary>
-<br/>
 
-The app must have the following functionalities
+- Keep the existing code in **Home Route** and add a **Login Route** and a **Cart Route** to the application.
+- **Login Route Functionality**
+  - When a valid username and password are provided and the Login button is clicked, navigate the user to the Home route. Else, display the error message. Use `js-cookie` to maintain Cookies for authentication.
+  - If an authenticated user attempts to access either the **Home Route** or **Cart Route**, they should be redirected to the corresponding route. Else, should be redirected to the **Login Route**.
+- **Home Route Functionality**
 
-- When an unauthenticated user tries to access the **Cart** Route, then the page should be navigated to **Login** Route
+  - When the Cart icon button in the header is clicked, then the page should be navigated to the **Cart** route.
+  - When the restaurant name in the header is clicked, then the page should be navigated to the **Home** route.
+  - Add a `Logout` button in the header of the **Home Route** and add corresponding functionality.
+  - Add a feature to add items to the cart with a click of a button. The `ADD TO CART` button should be displayed only if the dish items are available and the dish quantity is greater than **0**.
+    - When the `ADD TO CART` button of a particular dish item is clicked, that dish item should be added to the **Cart Route** and the count should be increased by one at the cart icon.
+    - When the user clicks the `ADD TO CART` button multiple times, the count should not increase at the cart icon as it is the same item and count in the **Cart Route** should be increased for that particular dish.
 
-- Following are the features to be implemented
+- **Cart Route Functionality**
 
-  - Feature 1
+  - The `Cart` Route should have a header similar to the Home Route.
+  - Add a `Remove All` button in the `Cart Route`. Implement this by adding a button.
+    - When a user clicks on the **Remove All** button, all the cart items should be removed from the cart and an <a href="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png" target="_blank_">Empty Cart Image</a> should be displayed.
+  - Each cart item on the cart page should include the dish name, dish image, dish price, plus (`+`) button, minus (`-`) button, quantity of the dish item, and a remove button.
+  - In each cart item in the cart
+    - When the plus button is clicked, then the quantity of the dish should be increased and when minus button is clicked, then the quantity of the dish should be decreased.
+    - When the quantity of a dish reaches zero, the dish item should be removed from the cart.
+    - Based on the quantity of the dish, the dish price should be updated accordingly.
+    - When a user clicks on the remove button, the cart item should be removed from the cart list.
 
-    - When an authenticated user tries to add the same product multiple times
-      - The quantity of the product should be updated accordingly, and the count of the cart items in the header should be remained same
+- You need to use **React Context** to maintain that sync between the **Home Route** and **Cart Route**. Use the context as given below for the test cases to pass.
 
-  - Feature 2
+  - The `CartContext` has an object with the following properties
+    - `cartList`- this key stores the cart items
+    - `removeAllCartItems`- this method is used to remove all the cart items in the cartList
+    - `addCartItem`- this method adds the cart item to the cartList
+    - `removeCartItem`- this method removes the cart item from the cartList
+    - `incrementCartItemQuantity`- this method increases the quantity of a dish in the cartList
+    - `decrementCartItemQuantity`- this method decreases the quantity of a dish in the cartList
 
-    - The total amount and number of items in the cart should be displayed in the **Cart** Route
+- Make sure your application maintains a good CSS styling.
 
-  - Feature 3
-
-    - In each cart item in the cart
-      - When the plus icon is clicked, then the quantity of the product should be incremented by one
-      - When the minus icon is clicked, then the quantity of the product should be decremented by one
-      - When the quantity of the product is one and the minus icon is clicked, then the respective product should be removed from the cart
-      - Based on the quantity of the product, the product price and the Cart Summary, i.e the total cost should be updated accordingly
-
-  - Feature 4
-
-    - When an authenticated user clicks on the remove button, cart item should be removed from the cart list
-
-  - Feature 5
-
-    - When an authenticated user clicks on the **Remove All** button, all the cart items should be removed from the cart and [Empty Cart View](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-empty-cart-view.png) should be displayed
-
-- The `CartContext` has an object as a value with the following properties
-  - `cartList` - this key stores the cart items
-  - `removeAllCartItems` - this method is used to remove all the cart items in the `cartList`
-  - `addCartItem` - this method adds the cart item to the `cartList`
-  - `removeCartItem` - this method removes the cart item from the `cartList`
-  - `incrementCartItemQuantity` - this method increases the quantity of a product in the `cartList`
-  - `decrementCartItemQuantity` - this method decreases the quantity of a product in the `cartList`
-
-</details>
-
-<details>
-<summary>Components Structure</summary>
-
-<br/>
-<div style="text-align: center;">
-    <img src="https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-component-structure-breakdown.png" alt="component structure breakdown" style="max-width:100%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12)">
-</div>
-<br/>
+<MultiLineNote>
+Generally, in the interviews, the interviewer will not specify you to use context to solve the question. You need to decide based on the use case.
+</MultiLineNote>
 
 </details>
 
+### API Details
+
 <details>
-<summary>Implementation Files</summary>
+<summary>Login API</summary>
 <br/>
+**Use this API for authentication**
 
-Use these files to complete the implementation:
+- https://apis.ccbp.in/login
 
-- `src/App.js`
-- `src/components/Cart/index.js`
-- `src/components/Cart/index.css`
-- `src/components/CartItem/index.js`
-- `src/components/CartItem/index.css`
-- `src/components/CartSummary/index.js`
-- `src/components/CartSummary/index.css`
+Request:
+
+```json
+{
+  "username": "rahul",
+  "password": "rahul@2021"
+}
+```
+
+Success Response:
+
+```json
+{
+  "jwt_token": "token_string"
+}
+```
+
+Failure Response:
+
+```json
+{
+  "status_code": 404,
+  "error_msg": "Username is not found"
+}
+```
+
 </details>
 
-### Quick Tips
+### Setup Instructions
 
 <details>
-<summary>Click to view</summary>
-<br>
+<summary> **Follow these steps before starting to code for this project.**</summary>
 
-- The `line-height` CSS property sets the height of a line box. It's commonly used to set the distance between lines of text
+- After setting up this project delete the `README.md` file in the CCBP IDE.
+- Clone the existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant</a> code from your GitHub account to add new functionalities to it.
+  - If the existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant</a> code is not available in your git, push your code to git.
+    - <a href="https://learning.ccbp.in/3da6f1a6-0892/course?c_id=ade6e642-cd5c-4896-9edd-3f06d3dc2069&s_id=49896a46-f484-4b42-b459-2626f77e6796&t_id=9f27b553-4bbe-400f-9025-9044f79acda0" target="_blank_">Click here to learn how to push your code to git</a>
+  - Once the code is pushed to git, clone it into this project using the below command.
 
-  ```
-  line-height: 1.5;
-  ```
+```cmd
+git clone {git repository URL} /home/workspace/reactjs/coding-practices/enhancementOfRestaurantApp
+```
 
-    <br/>
-    <img src="https://assets.ccbp.in/frontend/react-js/line-height-img.png" alt="line height" style="width:90%; max-width: 600px;"/>
+<MultiLineNote>
+In the above command, replace this `{git repository URL}` with your actual Git URL.
+</MultiLineNote>
 
-- The array method `find()` returns the first item's value that satisfies the provided testing function. If no item is found, it returns `undefined`
-
-  **Syntax**: `arr.find(Testing Function)`
-
+- Download dependencies by running `npm install`
+- Start up the app using `npm start`
 </details>
 
 ### Important Note
@@ -136,52 +119,32 @@ Use these files to complete the implementation:
 
 **The following instructions are required for the tests to pass**
 
-- `BsPlusSquare`, `BsDashSquare` icons from `react-icons` should be used for **plus** and **minus** buttons in cart item
-- The Cart Item should consist of two HTML button elements with data-testid attribute values as **plus** and **minus** respectively
-- `AiFillCloseCircle` icon from react-icons should be used for **remove** button in cartItem
-- The Cart Item should consist of an HTML button element with data-testid attribute values as **remove**
-- The product image in **Cart Item** Route should have the alt as `title` of the product
+- **Routes**
 
-- Prime User credentials
+  - `Home` Route should consist of `/` in the URL path
+  - `Cart` Route should consist of `/cart` in the URL path
 
-  ```text
-   username: rahul
-   password: rahul@2021
-  ```
+- **Header**
 
-- Non-Prime User credentials
-
-  ```text
-   username: raja
-   password: raja@2021
-  ```
+  - The HTML button element _Cart Icon Button_ should have the `data-testid` attribute value as **cart**.
 
 </details>
 
-### Resources
+<MultiLineNote>
 
-<details>
-<summary>Colors</summary>
+- You must clone the existing <a href="https://learning.ccbp.in/question/d51bb3e2-c4f7-4e1a-bcdb-b0970b57be00" target="_blank_">Restaurant App</a> repo, as test cases are added for both the existing Restaurant app and the new functionality.
+- These projects are introduced to help you prepare well for similar questions asked during interviews. </MultiLineNote>
+
+### Submission Form:
+
+<center>Click the below button and submit your git URL and published URL of the current coding assignment</center>
+<br>
+<a  href="https://forms.ccbp.in/restaurant-app-enhancement-project-submission-form" target="_blank_">
+  <center><button style="color: #fff; border: none; cursor: pointer; width: 218px; height: 34px; background-color: rgb(22, 101, 216); border-radius: 5.4px; box-shadow: rgb(0 0 0 / 36%) 0px 2px 4px 0px;font-family: Inter;font-size: 14px;color: rgb(255, 255, 255);font-weight: 500;letter-spacing: 0.5px;text-transform: uppercase;">
+    SUBMIT
+  </button>
+  </center>
+</a>
 
 <br/>
-
-<div style="background-color: #0b69ff; width: 150px; padding: 10px; color: white">Hex: #0b69ff</div>
-<div style="background-color: #171f46; width: 150px; padding: 10px; color: white">Hex: #171f46</div>
-<div style="background-color: #616e7c; width: 150px; padding: 10px; color: white">Hex: #616e7c</div>
-<div style="background-color: #ffffff; width: 150px; padding: 10px; color: black">Hex: #ffffff</div>
-
-</details>
-
-<details>
-<summary>Font-families</summary>
-
-- Roboto
-
-</details>
-
-> ### _Things to Keep in Mind_
->
-> - All components you implement should go in the `src/components` directory.
-> - Don't change the component folder names as those are the files being imported into the tests.
-> - **Do not remove the pre-filled code**
-> - Want to quickly review some of the concepts you’ve been learning? Take a look at the Cheat Sheets.
+<center>**Follow the clean code guidelines**</center>
